@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Jomba Juice Order Page</title>
+	</head>
+	<body>
+		<input type="button" value="Add Fruit" id="fruitname" onclick="addprompt()">
+		<p id="yourdrink">Your Order</p>
+		<script>
+			var juice = [];
+			function addprompt(){
+				var fruit = prompt("Choose a fruit");
+				juice.push(fruit);
+				juice.sort();
+				console.log(juice);
+				document.getElementById("yourdrink").innerHTML="Your juice has "+juice.join(" with ")+".";
+			}
+		</script>
+	</body>
+</html>
