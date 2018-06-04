@@ -9,7 +9,7 @@
 		<script>
 			var juice = [];
 			function addprompt(){
-				var fruit = prompt("Choose a fruit");
+				var fruit = prompt("Choose a fruit").toLowerCase();
 				juice.push(fruit);
 				juice.sort();
 				console.log(juice);
