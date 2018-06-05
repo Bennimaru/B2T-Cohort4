@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<p id="display">Welcome message</p>
+		<script>
+			var d = new Date();
+			var num= d.getDay();
+			switch(num){
+				case 0:
+				document.getElementById("display").innerHTML="Greetings, today is Sunday. Kick back and relax.";
+				break;
+				case 1:
+				document.getElementById("display").innerHTML="Today is Monday. Time to start the week.";
+				break;
+				case 2:
+				document.getElementById("display").innerHTML="Today is Tuesday. Keep working.";
+				break;
+				case 3:
+				document.getElementById("display").innerHTML="Today is Wednesday. Hump Day, keep it up.";
+				break;
+				case 4:
+				document.getElementById("display").innerHTML="Today is Thursday. Almost there.";
+				break;
+				case 5:
+				document.getElementById("display").innerHTML="TGIF. Summer Fridays, 2pm dismissal."
+				break;
+				case 6:
+				document.getElementById("display").innerHTML="Today is Saturday and you are working. Whomp whomp.";
+				break;
+			}
+		</script>
+	</body>
+</html>
