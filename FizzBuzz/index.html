@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<p id="display"></p>
+		<script>
+			var num=1;
+			while(num<=100){
+				if(num%3==0 && num%5!=0){
+					document.getElementById("display").innerHTML+="Fizz"+"<br>";
+				}else if(num%5==0 && num%3!=0){
+					document.getElementById("display").innerHTML+="Buzz"+"<br>";
+				}else if(num%3==0 && num%5==0){
+					document.getElementById("display").innerHTML+="FizzBuzz"+"<br>"
+				}else{
+					document.getElementById("display").innerHTML+=num+"<br>"
+				}
+			num++
+			}
+		</script>
+	</body>
+</html>
