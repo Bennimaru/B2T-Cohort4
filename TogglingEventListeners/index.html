@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>
+			div{
+				background-color: red;
+				width: 400px;
+				height: 400px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="Off" id="clicker">
+		<br>
+		<br>
+		<div id="box">Color Changing Box</div>
+
+		<script>
+			var count=0;
+			document.getElementById("clicker").addEventListener("click", function(){
+				count++;
+				if(count%2==0){
+					document.getElementById("clicker").value="Off";
+				}else{
+					document.getElementById("clicker").value="On";
+				}
+			})
+
+			function changeColor(){
+				var toggle = document.getElementById("box");
+				if(toggle.style.backgroundColor=="red" && document.getElementById("clicker").value=="On"){
+					toggle.style.backgroundColor="green";
+				}else{
+					toggle.style.backgroundColor="red";
+				}	
+			}
+
+			document.getElementById("box").addEventListener("mouseenter", changeColor);
+			document.getElementById("box").addEventListener("mouseleave", changeColor);
+
+		</script>
+	</body>
+</html>
