@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<input type="button" value="Show List" onclick="showList()">
+
+		<p id="display">Reading List</p>
+
+		<script>
+		var library = [
+ 			{ author: 'Bill Gates', title: 'The Road Ahead', readingStatus: true },
+ 			{ author: 'Steve Jobs', title: 'Walter Isaacson', readingStatus: true },
+ 			{ author: 'Suzanne Collins', title: 'Mockingjay: The Final Book of The Hunger Games', readingStatus: false }
+		];
+
+		function showList(){
+			document.getElementById("display").innerHTML='';
+			
+			for (var i = 0; i < library.length; i++) {
+				if (library[i].readingStatus==true) {
+					document.getElementById("display").innerHTML += '<li>'+"Already read "+library[i].title+" by "+library[i].author+".</li>"
+				}
+				else{
+					document.getElementById("display").innerHTML += '<li>'+"You still need to read "+library[i].title+" by "+library[i].author+".</li>"
+				}
+			}
+		}
+
+		</script>
+	</body>
+</html>
