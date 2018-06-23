@@ -1,0 +1,100 @@
+<!-- Keep track of how many books are currently in the library - seperate counter
+Wants the ability to add a book that includes the title, author, and a button to change the read status to yes or no - object oriented programming (title, author, stock), read status will need boolean operator(true/false)
+Wants the ability to checkout a book - subtract from stock, date taken out, return date
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Library catalog</title>
+
+	</head>
+	<body>
+		<div>
+			<input type="text" placeholder="Author" id="author">
+			<input type="text" placeholder="Title" id="title">
+			<input type="number" placeholder="Enter 13 digit ISBN" id="isbn">
+			<input type="number" placeholder="Number of books" id="stock">
+			<input type="button" value="Save to Library" onclick="save()">
+		</div>
+
+		<div>
+			<input type="text" placeholder="Author" id="author2">
+			<input type="text" placeholder="Title" id="title2">
+			<input type="number" placeholder="Enter 13 digit ISBN" id="isbn2">
+			<input type="button" value="Search" onclick="showBooks()">
+			<input type="button" value="Change Read Status" onclick="toggle()">
+			<input type="button" value="Checkout" onclick="checkout()">
+			
+		</div>
+
+		<p id="display">List</p>
+
+		<script>
+			var library = [];
+			var readStatus=null;
+			var totalBooks=0;
+
+			function book(){
+				return{
+					author:document.getElementById("author").value.toLowerCase(),
+					title:document.getElementById("title").value.toLowerCase(),
+					isbn:document.getElementById("isbn").value,
+					stock:document.getElementById("stock").value,
+				};
+			}
+
+			function save(){
+				library.push(book());
+				totalBooks+=parseInt(document.getElementById("stock").value);
+				console.log(library);
+			}
+
+			function showBooks(){
+				document.getElementById("display").innerHTML="";
+				var booksFound = false;
+
+				for (var i = 0; i < library.length; i++) {
+					if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() || library[i].isbn==document.getElementById("isbn2")){
+
+					document.getElementById("display").innerHTML+= "<ul>"+
+					"Author: "+library[i].author+"<br>"+
+					"Title: "+library[i].title+"<br>"+
+					"ISBN: "+library[i].isbn+"<br>"+
+					"Stock: "+library[i].stock+"<br>"+
+					"Read Status: "+readStatus+"</ul>"
+					booksFound = true;
+					}
+				};
+				if(booksFound==false){
+					document.getElementById("display").innerHTML="Sorry. This book is not in circulation."
+				}
+				console.log(library);
+			}
+
+			function toggle(){
+				for (var i = 0; i < library.length; i++) {
+					if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() && readStatus==null){
+						library[i].status="No"	
+					}else{
+						library[i].status="Yes"
+					}
+				};//toggles the read status of all books, need to target just one specific book
+			console.log(library);
+			}
+
+			function checkout(){
+				for (var i = 0; i < library.length; i++) {
+					if(library[i].stock>0){
+						library[i].stock-1
+					}
+				};	
+			console.log(library);
+			}
+
+			function resetForm(){
+			
+			};
+
+		</script>
+	</body>
+</html>
