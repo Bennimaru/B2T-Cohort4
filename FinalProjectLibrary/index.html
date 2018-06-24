@@ -22,7 +22,7 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 			<input type="text" placeholder="Title" id="title2">
 			<input type="number" placeholder="Enter 13 digit ISBN" id="isbn2">
 			<input type="button" value="Search" onclick="showBooks()">
-			<input type="button" value="Change Read Status" onclick="toggle()">
+			<input type="button" value="Change Read Status" id="toggle">
 			<input type="button" value="Checkout" onclick="checkout()">
 			
 		</div>
@@ -42,46 +42,53 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 					stock:document.getElementById("stock").value,
 				};
 			}
-
 			function save(){
 				library.push(book());
 				totalBooks+=parseInt(document.getElementById("stock").value);
 				console.log(library);
 			}
-
 			function showBooks(){
 				document.getElementById("display").innerHTML="";
 				var booksFound = false;
-
 				for (var i = 0; i < library.length; i++) {
-					if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() || library[i].isbn==document.getElementById("isbn2")){
-
-					document.getElementById("display").innerHTML+= "<ul>"+
-					"Author: "+library[i].author+"<br>"+
-					"Title: "+library[i].title+"<br>"+
-					"ISBN: "+library[i].isbn+"<br>"+
-					"Stock: "+library[i].stock+"<br>"+
-					"Read Status: "+readStatus+"</ul>"
-					booksFound = true;
+					if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() || library[i].isbn==document.getElementById("isbn2").value){
+						document.getElementById("display").innerHTML+= "<ul>"+
+						"Author: "+library[i].author+"<br>"+
+						"Title: "+library[i].title+"<br>"+
+						"ISBN: "+library[i].isbn+"<br>"+
+						"Stock: "+library[i].stock+"<br>"+
+						"Read Status: "+readStatus+"</ul>"
+						booksFound = true;
 					}
 				};
 				if(booksFound==false){
 					document.getElementById("display").innerHTML="Sorry. This book is not in circulation."
 				}
 				console.log(library);
-			}
+			};
 
-			function toggle(){
+			var count =0;
+			document.getElementById("toggle").addEventListener("click",function(){
+				count++;
 				for (var i = 0; i < library.length; i++) {
-					if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() && readStatus==null){
-						library[i].status="No"	
-					}else{
-						library[i].status="Yes"
-					}
-				};//toggles the read status of all books, need to target just one specific book
-			console.log(library);
-			}
-
+					if(count%2==0){
+					library[i].status="Off";
+				    }else{
+					library[i].status="On";
+				    }
+				};
+				console.log(library);
+			});
+			// function toggle(){
+			// 	for (var i = 0; i < library.length; i++) {
+			// 		if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() && readStatus==null){
+			// 			library[i].status="No"	
+			// 		}else{
+			// 			library[i].status="Yes"
+			// 		}
+			// 	};//toggles the read status of all books, need to target just one specific book
+			// console.log(library);
+			// }
 			function checkout(){
 				for (var i = 0; i < library.length; i++) {
 					if(library[i].stock>0){
@@ -90,11 +97,9 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 				};	
 			console.log(library);
 			}
-
 			function resetForm(){
 			
 			};
-
 		</script>
 	</body>
 </html>
