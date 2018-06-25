@@ -6,28 +6,48 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 <html>
 	<head>
 		<title>Library catalog</title>
+		<style>
+			body {
+				background-image: url("https://psmag.com/.image/t_share/MTQ5NjM2MTg5NzU2ODYwMjE4/library.jpg");
+				background-repeat: repeat-y;
+				background-size: cover;
+			}
+			div {
+				width:40%;
+				height:40%;
+				background-color: linen;
+			}
+		</style>
 
 	</head>
 	<body>
-		<div>
+		<div id="div1">
 			<input type="text" placeholder="Author" id="author">
+			<br>
 			<input type="text" placeholder="Title" id="title">
+			<br>
 			<input type="number" placeholder="Enter 13 digit ISBN" id="isbn">
+			<br>
 			<input type="number" placeholder="Number of books" id="stock">
+			<br>
 			<input type="button" value="Save to Library" onclick="save()">
 		</div>
-
-		<div>
+		<br>
+		<br>
+		<div id="div2">
 			<input type="text" placeholder="Author" id="author2">
+			<br>
 			<input type="text" placeholder="Title" id="title2">
+			<br>
 			<input type="number" placeholder="Enter 13 digit ISBN" id="isbn2">
+			<br>
 			<input type="button" value="Search" onclick="showBooks()">
-			<input type="button" value="Change Read Status" id="toggle">
-			<input type="button" value="Checkout" onclick="checkout()">
-			
+			<input type="button" value="Change Read Status" onclick="toggle()" id="toggle">
+			<input type="button" value="Checkout" onclick="checkout()">			
 		</div>
 
 		<p id="display">List</p>
+		<p id="status">Read?</p>
 
 		<script>
 			var library = [];
@@ -66,37 +86,43 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 				}
 				console.log(library);
 			};
-
-			var count =0;
-			document.getElementById("toggle").addEventListener("click",function(){
-				count++;
-				for (var i = 0; i < library.length; i++) {
-					if(count%2==0){
-					library[i].status="Off";
-				    }else{
-					library[i].status="On";
-				    }
-				};
-				console.log(library);
-			});
-			// function toggle(){
+			// var count =0;			
+			// document.getElementById("toggle").addEventListener("click",function(){
+			// 	count++;
+			// 	var booksFound1 = false;
 			// 	for (var i = 0; i < library.length; i++) {
-			// 		if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() && readStatus==null){
-			// 			library[i].status="No"	
-			// 		}else{
-			// 			library[i].status="Yes"
-			// 		}
-			// 	};//toggles the read status of all books, need to target just one specific book
-			// console.log(library);
-			// }
-			function checkout(){
+			// 		if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() || library[i].isbn==document.getElementById("isbn2").value && count%2==0){
+			// 			library[i].status="No";
+			// 			booksFound1 = true;
+			// 	    }else if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() || library[i].isbn==document.getElementById("isbn2").value && count%2!=0){
+			// 		library[i].status="Yes";
+			// 		booksFound1 = true;
+			// 	    }
+			// 	};
+			// 	console.log(library);
+			// });
+			function toggle(){
 				for (var i = 0; i < library.length; i++) {
-					if(library[i].stock>0){
-						library[i].stock-1
+					if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() && readStatus==null){
+						library[i].status="No";	
+					}else{
+						library[i].status="Yes";
 					}
+				};//toggles the read status of all books, need to target just one specific book
+			console.log(library);
+			};
+
+			function checkout(){
+				function showBooks(){
+					for (var i = 0; i < library.length; i++){
+						if (library[i].stock>1){
+							parseInt(library[i].stock)-1;
+						}
+					};
 				};	
 			console.log(library);
-			}
+			};
+
 			function resetForm(){
 			
 			};
