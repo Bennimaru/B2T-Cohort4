@@ -6,48 +6,83 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 <html>
 	<head>
 		<title>Library catalog</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style>
 			body {
 				background-image: url("https://psmag.com/.image/t_share/MTQ5NjM2MTg5NzU2ODYwMjE4/library.jpg");
 				background-repeat: repeat-y;
 				background-size: cover;
 			}
-			div {
-				width:40%;
-				height:40%;
+			#topBox{
 				background-color: linen;
 			}
+			#bottomBox{
+				background-color:#c6ceaf;
+			}
 		</style>
-
 	</head>
 	<body>
-		<div id="div1">
-			<input type="text" placeholder="Author" id="author">
-			<br>
-			<input type="text" placeholder="Title" id="title">
-			<br>
-			<input type="number" placeholder="Enter 13 digit ISBN" id="isbn">
-			<br>
-			<input type="number" placeholder="Number of books" id="stock">
-			<br>
-			<input type="button" value="Save to Library" onclick="save()">
-		</div>
-		<br>
-		<br>
-		<div id="div2">
-			<input type="text" placeholder="Author" id="author2">
-			<br>
-			<input type="text" placeholder="Title" id="title2">
-			<br>
-			<input type="number" placeholder="Enter 13 digit ISBN" id="isbn2">
-			<br>
-			<input type="button" value="Search" onclick="showBooks()">
-			<input type="button" value="Change Read Status" onclick="toggle()" id="toggle">
-			<input type="button" value="Checkout" onclick="checkout()">			
+		<div class="container" id="topBox">
+			<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#home">Add Book</a></li>
+			<li><a data-toggle="tab" href="#menu1">Search</a></li>
+			<li><a data-toggle="tab" href="#menu2">Checkout</a></li>
+			<li><a data-toggle="tab" href="#menu3">Read Status</a></li>
+			</ul>
+
+			<div class="tab-content">
+    			<div id="home" class="tab-pane fade in active">
+      				<h3>Add/Check-In Books</h3>
+      				<input type="text" placeholder="Author" id="author">
+					<br>
+					<input type="text" placeholder="Title" id="title">
+					<br>
+					<input type="number" placeholder="Enter 13 digit ISBN" id="isbn">
+					<br>
+					<input type="number" placeholder="Number of books" id="stock">
+					<br>
+					<input type="button" value="Save to Library" onclick="save()">
+    			</div>
+    			<div id="menu1" class="tab-pane fade">
+      				<h3>Find a Book</h3>
+      				<input type="text" placeholder="Author" id="author2">
+					<br>
+					<input type="text" placeholder="Title" id="title2">
+					<br>
+					<input type="number" placeholder="Enter 13 digit ISBN" id="isbn2">
+					<br>
+					<input type="button" value="Search" onclick="showBooks()">
+    			</div>
+    			<div id="menu2" class="tab-pane fade">
+      				<h3>Books to Check-Out</h3>
+      				<input type="text" placeholder="Author" id="author3">
+					<br>
+					<input type="text" placeholder="Title" id="title3">
+					<br>
+					<input type="number" placeholder="Number of books" id="stock2">
+					<br>
+					<input type="button" value="Checkout" onclick="checkout()">
+    			</div>
+    			<div id="menu3" class="tab-pane fade">
+    				<h3>Change Read Status</h3>
+    				<input type="text" placeholder="Author" id="author4">
+					<br>
+					<input type="text" placeholder="Title" id="title4">
+					<br>
+					<input type="button" value="Change Read Status" onclick="toggle()">
+    			</div>
+  			</div>
 		</div>
 
-		<p id="display">List</p>
-		<p id="status">Read?</p>
+		<div class="container" id="bottomBox">
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6" id="display"></div>
+				<div class="col-3"></div>
+			</div>			
+		</div>
 
 		<script>
 			var library = [];
