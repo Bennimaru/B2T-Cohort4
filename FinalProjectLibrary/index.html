@@ -39,19 +39,17 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 					<br>
 					<input type="text" placeholder="Title" id="title">
 					<br>
-					<input type="number" placeholder="Enter 13 digit ISBN" id="isbn">
-					<br>
 					<input type="number" placeholder="Number of books" id="stock">
 					<br>
 					<input type="button" value="Save to Library" onclick="save()">
+					<br>
+					<input type="button" value="Total Number of Books" onclick="librarytotal()">
     			</div>
     			<div id="menu1" class="tab-pane fade">
       				<h3>Find a Book</h3>
       				<input type="text" placeholder="Author" id="author2">
 					<br>
 					<input type="text" placeholder="Title" id="title2">
-					<br>
-					<input type="number" placeholder="Enter 13 digit ISBN" id="isbn2">
 					<br>
 					<input type="button" value="Search" onclick="showBooks()">
     			</div>
@@ -86,49 +84,63 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 
 		<script>
 			var library = [
-				{author: "Homer", title:"Odyssey",stock:"3",readStatus:}
-				{author: "Charles Darwin", title:"On the Origin of Species",stock:"4",readStatus:}
-				{author: "Mark Twain", title:"Adventures of Huckleberry Finn",stock:"2",readStatus:}
-				{author: "Jonathan Swift", title:"Gulliver's Travels",stock:"1",readStatus:}
-				{author: "Adam Smith", title:"The Wealth of Nations",stock:"1",readStatus:}
-				{author: "Leo Tolstoy", title:"War and Peace",stock:"3",readStatus:}
-				{author: "Herman Melville", title:"Moby Dick",stock:"4",readStatus:}
+				{author: "Homer", title:"Odyssey",stock:"3",readStatus:""},
+				{author: "Charles Darwin", title:"On the Origin of Species",stock:"4",readStatus:""},
+				{author: "Mark Twain", title:"Adventures of Huckleberry Finn",stock:"2",readStatus:""},
+				{author: "Jonathan Swift", title:"Gulliver's Travels",stock:"1",readStatus:""},
+				{author: "Adam Smith", title:"The Wealth of Nations",stock:"1",readStatus:""},
+				{author: "Leo Tolstoy", title:"War and Peace",stock:"3",readStatus:""},
+				{author: "Herman Melville", title:"Moby Dick",stock:"4",readStatus:""}
 			];
-			var readStatus=null;
 			var totalBooks=0;
-
-			function book(){
+			var readStatus=null;
+			
+			function book(author, title, stock){
 				return{
 					author:document.getElementById("author").value.toLowerCase(),
 					title:document.getElementById("title").value.toLowerCase(),
-					isbn:document.getElementById("isbn").value,
 					stock:document.getElementById("stock").value,
 				};
 			}
 			function save(){
 				library.push(book());
-				totalBooks+=parseInt(document.getElementById("stock").value);
 				console.log(library);
 			}
+			function librarytotal(){
+				for (var i = 0; i < library.length; i++) {
+					totalBooks+=parseInt(library[i].stock);
+					document.getElementById("display").innerHTML="You currently have "+totalBooks+" books in the library."
+				}
+				console.log(library);
+			}
+
 			function showBooks(){
 				document.getElementById("display").innerHTML="";
 				var booksFound = false;
 				for (var i = 0; i < library.length; i++) {
-					if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() || library[i].isbn==document.getElementById("isbn2").value){
-						document.getElementById("display").innerHTML+= "<ul>"+
+					if(library[i].author.toLowerCase()==document.getElementById("author2").value.toLowerCase() || library[i].title.toLowerCase()==document.getElementById("title2").value.toLowerCase()){
+						document.getElementById("display").innerHTML+="<ul>"+
 						"Author: "+library[i].author+"<br>"+
 						"Title: "+library[i].title+"<br>"+
-						"ISBN: "+library[i].isbn+"<br>"+
-						"Stock: "+library[i].stock+"<br>"+
-						"Read Status: "+readStatus+"</ul>"
+						"Stock: "+library[i].stock+"</ul>"
 						booksFound = true;
 					}
 				};
 				if(booksFound==false){
-					document.getElementById("display").innerHTML="Sorry. This book is not in circulation."
+					document.getElementById("display").innerHTML="Sorry. This book is not in circulation.";
+				}
+				console.log(library); console.log(booksFound);
+			}
+
+			function checkout(){
+				for (var i = 0; i < library.length; i++) {
+					if(library[i].author.toLowerCase()==document.getElementById("author3").value.toLowerCase() || library[i].title.toLowerCase()==document.getElementById("title3").value.toLowerCase() && document.getElementById("stock2").value <= library[i].stock){
+						library[i].stock-1;
+						document.getElementById("display").innerHTML="You have borrowed "+document.getElementById("stock2").value+" copies of "+library[i].title+" by "+library[i].author+" on "+ new Date;
+					}
 				}
 				console.log(library);
-			};
+			}				
 			// var count =0;			
 			// document.getElementById("toggle").addEventListener("click",function(){
 			// 	count++;
@@ -146,28 +158,13 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 			// });
 			function toggle(){
 				for (var i = 0; i < library.length; i++) {
-					if(library[i].author==document.getElementById("author2").value.toLowerCase() || library[i].title==document.getElementById("title2").value.toLowerCase() && readStatus==null){
-						library[i].status="No";	
+					if(library[i].author.toLowerCase()==document.getElementById("author4").value.toLowerCase() || library[i].title.toLowerCase()==document.getElementById("title4").value.toLowerCase() && readStatus==null){
+						library[i].readStatus="No";	
 					}else{
-						library[i].status="Yes";
+						library[i].readStatus="Yes";
 					}
 				};//toggles the read status of all books, need to target just one specific book
 			console.log(library);
-			};
-
-			function checkout(){
-				function showBooks(){
-					for (var i = 0; i < library.length; i++){
-						if (library[i].stock>1){
-							parseInt(library[i].stock)-1;
-						}
-					};
-				};	
-			console.log(library);
-			};
-
-			function resetForm(){
-			
 			};
 		</script>
 	</body>
