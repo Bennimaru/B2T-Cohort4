@@ -118,17 +118,18 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 					stock:document.getElementById("stock").value,
 				};
 			}
+
 			function save(){
 				library.push(book());
 				document.getElementById("display").innerHTML=document.getElementById("stock").value+" copies of "+document.getElementById("title").value+" by "+document.getElementById("author").value+" has been added to the library.";
 				console.log(library);
 			}
+
 			function librarytotal(){
 				for (var i = 0; i < library.length; i++) {
 					totalBooks+=parseInt(library[i].stock);
 					document.getElementById("display").innerHTML="You currently have "+totalBooks+" books in the library.";
 				}
-
 				console.log(library);
 			}
 
@@ -157,6 +158,10 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 						document.getElementById("display").innerHTML="You have borrowed "+document.getElementById("stock2").value+" copies of "+library[i].title+" by "+library[i].author+" on "+ new Date;
 					}
 				}
+				var returnDate = new Date();
+				returnDate.setDate(returnDate.getDate() + 14);
+				document.getElementById("display2").innerHTML="The book(s) need to be returned by: "+ returnDate;
+
 				console.log(library);
 			}				
 			// var count =0;			
@@ -174,14 +179,15 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 			// 	};
 			// 	console.log(library);
 			// });
+			
 			function toggle(){
 				for (var i = 0; i < library.length; i++) {
-					if(library[i].author.toLowerCase()==document.getElementById("author4").value.toLowerCase() || library[i].title.toLowerCase()==document.getElementById("title4").value.toLowerCase() && readStatus==null){
+					if(library[i].author.toLowerCase()==document.getElementById("author4").value.toLowerCase() && library[i].title.toLowerCase()==document.getElementById("title4").value.toLowerCase() && readStatus==null){
 						library[i].readStatus="No";	
 					}else{
 						library[i].readStatus="Yes";
 					}
-				};//toggles the read status of all books, need to target just one specific book
+				};
 			console.log(library);
 			};
 		</script>
