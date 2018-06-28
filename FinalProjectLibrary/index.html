@@ -101,6 +101,7 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 		<script>
 			var library = [
 				{author: "Homer", title:"Odyssey",stock:"3",readStatus:""},
+				{author: "Homer", title:"Iliad", stock:"4",readStatus:""},
 				{author: "Charles Darwin", title:"On the Origin of Species",stock:"4",readStatus:""},
 				{author: "Mark Twain", title:"Adventures of Huckleberry Finn",stock:"2",readStatus:""},
 				{author: "Jonathan Swift", title:"Gulliver's Travels",stock:"1",readStatus:""},
@@ -152,20 +153,20 @@ Wants the ability to checkout a book - subtract from stock, date taken out, retu
 			}
 
 			function checkout(){
-				for (var i = 0; i < library.length; i++) {
-					if(library[i].author.toLowerCase()==document.getElementById("author3").value.toLowerCase() || library[i].title.toLowerCase()==document.getElementById("title3").value.toLowerCase() && document.getElementById("stock2").value <= library[i].stock){
-						library[i].stock=library[i].stock - document.getElementById("stock2").value;
-						document.getElementById("display").innerHTML="You have borrowed "+document.getElementById("stock2").value+" copies of "+library[i].title+" by "+library[i].author+" on "+ new Date;
-					}
-				}
 				var returnDate = new Date();
 				returnDate.setDate(returnDate.getDate() + 14);
 				var dd = returnDate.getDate();
 				var mm = returnDate.getMonth() + 1;
 				var yyyy = returnDate.getFullYear();
 				var returnDateString = mm + "/" + dd + "/" + yyyy;
-				document.getElementById("display2").innerHTML="The book(s) need to be returned by: "+ returnDateString;
 
+				for (var i = 0; i < library.length; i++) {
+					if(library[i].author.toLowerCase()==document.getElementById("author3").value.toLowerCase() && library[i].title.toLowerCase()==document.getElementById("title3").value.toLowerCase() && document.getElementById("stock2").value <= library[i].stock){
+						library[i].stock=library[i].stock - document.getElementById("stock2").value;
+						document.getElementById("display").innerHTML="You have borrowed "+document.getElementById("stock2").value+" copies of "+library[i].title+" by "+library[i].author+" on "+ new Date;
+						document.getElementById("display2").innerHTML="The book(s) need to be returned by: "+ returnDateString;
+					}
+				}								
 				console.log(library);
 			}				
 			// var count =0;			
